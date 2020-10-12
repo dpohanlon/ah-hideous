@@ -1,3 +1,10 @@
+'''
+    Run inside Blender, and populate sys.argv[1] with the JSON location:
+
+    sys.argv.append('data.json')
+    exec(open("createMesh.py").read())
+'''
+
 try:
     import bpy
     import bmesh
@@ -11,10 +18,11 @@ import sys
 import numpy as np
 
 def loadData(fileName):
-    return data = np.array(list(json.load(open(fileName, 'r'))))
+    return np.array(list(json.load(open(fileName, 'r'))))
 
 def createMesh(data):
 
+    print(data.shape)
     nx, ny = data.shape
 
     size = 20.0
@@ -24,7 +32,7 @@ def createMesh(data):
     yBins = np.linspace(-size // 2, size // 2, ny)
 
     bpy.ops.mesh.primitive_grid_add(x_subdivisions=nx, y_subdivisions=ny, size = size)
-    
+
     ob = bpy.context.object
     me = ob.data
 
@@ -43,6 +51,11 @@ def createMesh(data):
         xBinIdx = np.digitize(center[0], xBins)
         yBinIdx = np.digitize(center[1], yBins)
 
+        # TODO: Fix me properly
+        xBinIdx = max(0, min(xBinIdx, nx - 1))
+        yBinIdx = max(0, min(yBinIdx, ny - 1))
+
+
         w = data[xBinIdx][yBinIdx] * scale
 
         r = bmesh.ops.extrude_discrete_faces(bm, faces=[face])
@@ -54,7 +67,7 @@ def createMesh(data):
 
 if __name__ == '__main__':
 
-    if len(sys.argv) < 2:
+    if len(sys.argv) > 1:
 
         fileName = sys.argv[1]
 
