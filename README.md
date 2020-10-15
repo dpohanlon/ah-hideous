@@ -2,7 +2,7 @@
 Render histograms in Blender.
 
 <p align="center">
-  <img width="800" height="450" src="examples/examples/lb1.png">
+  <img width="800" height="450" src="examples/lb1.png">
 </p>
 
 
