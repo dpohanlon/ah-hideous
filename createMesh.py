@@ -55,7 +55,6 @@ def createMesh(data):
         xBinIdx = max(0, min(xBinIdx, nx - 1))
         yBinIdx = max(0, min(yBinIdx, ny - 1))
 
-
         w = data[xBinIdx][yBinIdx] * scale
 
         r = bmesh.ops.extrude_discrete_faces(bm, faces=[face])
