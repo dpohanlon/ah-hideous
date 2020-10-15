@@ -1,24 +1,26 @@
-'''
+"""
     Run inside Blender, and populate sys.argv[1] with the JSON location:
 
     sys.argv.append('data.json')
     exec(open("createMesh.py").read())
-'''
+"""
 
 try:
     import bpy
     import bmesh
     from mathutils import Vector
 except:
-    print('Run me in Blender.')
+    print("Run me in Blender.")
 
 import json
 import sys
 
 import numpy as np
 
+
 def loadData(fileName):
-    return np.array(list(json.load(open(fileName, 'r'))))
+    return np.array(list(json.load(open(fileName, "r"))))
+
 
 def createMesh(data):
 
@@ -31,7 +33,7 @@ def createMesh(data):
     xBins = np.linspace(-size // 2, size // 2, nx)
     yBins = np.linspace(-size // 2, size // 2, ny)
 
-    bpy.ops.mesh.primitive_grid_add(x_subdivisions=nx, y_subdivisions=ny, size = size)
+    bpy.ops.mesh.primitive_grid_add(x_subdivisions=nx, y_subdivisions=ny, size=size)
 
     ob = bpy.context.object
     me = ob.data
@@ -40,7 +42,7 @@ def createMesh(data):
     bm.from_mesh(me)
     faces = bm.faces[:]
 
-    data = np.array(list(json.load(open(fileName, 'r'))))
+    data = np.array(list(json.load(open(fileName, "r"))))
 
     for face in faces:
 
@@ -59,12 +61,13 @@ def createMesh(data):
 
         r = bmesh.ops.extrude_discrete_faces(bm, faces=[face])
 
-        bmesh.ops.translate(bm, vec=Vector((0,0,w)), verts=r['faces'][0].verts)
+        bmesh.ops.translate(bm, vec=Vector((0, 0, w)), verts=r["faces"][0].verts)
 
     bm.to_mesh(me)
     me.update()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
 
     if len(sys.argv) > 1:
 
@@ -75,4 +78,4 @@ if __name__ == '__main__':
 
     else:
 
-        print('Need JSON file name argument.')
+        print("Need JSON file name argument.")
