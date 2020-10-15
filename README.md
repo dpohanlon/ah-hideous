@@ -8,7 +8,7 @@ Render histograms in Blender.
 Instructions
 ---
 
-The script in `createMesh.py` creates an extruded grid mesh within Blender, based on a JSON file that contains a 2D array representing the histogram bin contents. You can run this from the Python console within Blender by first passing adding the JSON file path to the 'arguments' list with `impory sys; sys.argv.append('data.json')`, and the execute the script with `exec(open("createMesh.py").read())`.
+The script in `createMesh.py` creates an extruded grid mesh within Blender, based on a JSON file that contains a 2D array representing the histogram bin contents. You can run this from the Python console within Blender by first passing adding the JSON file path to the 'arguments' list with `import sys; sys.argv.append('data.json')`, and the execute the script with `exec(open("createMesh.py").read())`.
 
 It's pretty barebones at the moment, and doesn't support histograms with an aspect ratio different from one, nor non-uniform bins. It probably will also crash if you go above a binning of around `100x100`.
 
