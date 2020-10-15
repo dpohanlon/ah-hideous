@@ -1,12 +1,15 @@
 # Thanks, I hate it.
 Render histograms in Blender.
 
-<img align="left" width="420" height="236" src="examples/e1.png">
-<img align="right" width="420" height="236" src="examples/lb1.png">
-</br>
+<p align="center">
+  <img width="800" height="450" src="examples/examples/lb1.png">
+</p>
+
+
+<!-- </br>
 <p align="center">
   <img width="420" height="236" src="examples/dp1.gif">
-</p>
+</p> -->
 
 To do
 -----
