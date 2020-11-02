@@ -14,6 +14,7 @@ except:
 
 import json
 import sys
+import math
 
 import numpy as np
 
@@ -65,6 +66,27 @@ def createMesh(data):
 
     bm.to_mesh(me)
     me.update()
+
+    # Add a plane for interest
+
+    bpy.ops.mesh.primitive_plane_add(size=1000, location=(0, 0, -10.0))
+
+    # Add and align the camera
+
+    camera_data = bpy.data.cameras.new(name="Camera")
+    camera_object = bpy.data.objects.new("Camera", camera_data)
+    camera_object.location = (66.0, -65.0, 78.0)
+    camera_object.rotation_euler = (math.radians(55.8), 0, math.radians(45.8))
+
+    bpy.context.scene.collection.objects.link(camera_object)
+
+    # Add a light source
+
+    lamp_data = bpy.data.lights.new(name="Lamp", type="POINT")
+    lamp_object = bpy.data.objects.new(name="Lamp", object_data=lamp_data)
+    lamp_object.location = (50, -30, 80)
+    lamp_object.data.energy = 1e5
+    bpy.context.scene.collection.objects.link(lamp_object)
 
 
 if __name__ == "__main__":
